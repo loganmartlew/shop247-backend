@@ -1,3 +1,6 @@
+// Load module alias to register custom path aliases
+require('module-alias/register');
+
 const express = require('express');
 const { port } = require('./config');
 
