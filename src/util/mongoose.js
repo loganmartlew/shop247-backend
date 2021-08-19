@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
+const { getMongoUri } = require('../config');
 
 const getDb = dbName => {
-  const username = process.env.DB_USERNAME;
-  const password = process.env.DB_PASSWORD;
-  const connectionString = `mongodb+srv://${username}:${password}@cluster0.ghvcd.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+  const mongoUri = getMongoUri(dbName);
 
-  mongoose.connect(connectionString, {
+  mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useFindAndModify: false,
     useUnifiedTopology: true,
