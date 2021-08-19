@@ -1,6 +1,6 @@
 const cors = require('cors');
 const { json } = require('body-parser');
-const routes = require('../api');
+const routes = require('@api');
 
 module.exports = async app => {
   app.use(cors());

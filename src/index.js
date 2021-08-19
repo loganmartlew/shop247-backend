@@ -2,7 +2,7 @@
 require('module-alias/register');
 
 const express = require('express');
-const { port } = require('./config');
+const { port } = require('@config');
 
 // IIFE to enable async/await, though intended node version supports top-level await
 (async () => {
