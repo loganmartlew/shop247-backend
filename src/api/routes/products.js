@@ -10,14 +10,7 @@ const { deleteProduct } = require('@util/products/deleteProduct');
 
 const route = Router();
 
-/*
-Search products
-CRUD operations (auth)
-*/
-
 // Search products - requires search terms
-// Filter by category
-// Query params - search: string, categories: string`stringified array`
 route.get('/', async (req, res) => {
   const query = req.query;
 
@@ -112,6 +105,8 @@ route.patch('/:productId', async (req, res) => {
     .json({ message: `Product updated`, product: updatedProduct });
 });
 
+// Delete a product
+// Authenticated
 route.delete('/:productId', async (req, res) => {
   if (!req.isLoggedIn) {
     return res
