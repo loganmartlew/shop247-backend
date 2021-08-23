@@ -6,7 +6,7 @@ module.exports = async () => {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
-    useFindAndModify: true,
+    useFindAndModify: false,
   });
 
   return connection.connection.db;
