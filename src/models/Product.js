@@ -22,11 +22,15 @@ const productSchema = new mongoose.Schema({
     min: 50, // Prices stored as cents
   },
   images: [imageSchema],
+  categories: [String],
   sellerId: {
     type: String,
     required: true,
   },
 });
+
+// Text search index
+productSchema.index({ name: 'text', description: 'text' });
 
 const Product = mongoose.model('product', productSchema);
 

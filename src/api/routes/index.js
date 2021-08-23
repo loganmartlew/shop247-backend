@@ -8,6 +8,10 @@ module.exports = () => {
     res.send('Shop247 API');
   });
 
+  app.get('/auth', (req, res) => {
+    res.json(req.query);
+  });
+
   app.use('/products', productsRoute);
 
   return app;
