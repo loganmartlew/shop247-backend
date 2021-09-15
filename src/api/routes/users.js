@@ -2,6 +2,7 @@ const { Router } = require('express');
 const userIsValid = require('@util/validation/userIsValid');
 const { getUserById } = require('@util/users/searchUsers');
 const { addUser } = require('@util/users/addUser');
+const { getProductsBySellerId } = require('@util/products/searchProducts');
 
 const route = Router();
 
@@ -35,4 +36,10 @@ route.get('/:uid', async (req, res) => {
 });
 
 // Get products being sold by a user
-// route.get('/:uid/products', async (req, res) => {})
+route.get('/:uid/products', async (req, res) => {
+  const uid = req.params.uid;
+
+  const products = await getProductsBySellerId(uid);
+
+  return res.status(200).json({ products });
+});
