@@ -19,8 +19,21 @@ const searchProducts = async searchString => {
 
 const searchProductsByCategories = async (searchString, categories) => {};
 
+const getProductsBySellerId = async sellerId => {
+  try {
+    const products = await Product.find({ serrerId });
+
+    if (!products) throw new Error();
+
+    return products;
+  } catch (err) {
+    return null;
+  }
+};
+
 module.exports = {
   getProductById,
   searchProducts,
   searchProductsByCategories,
+  getProductsBySellerId,
 };
