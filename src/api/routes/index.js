@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const productsRoute = require('./products');
+const cartRoute = require('./cart');
 
 module.exports = () => {
   const app = Router();
@@ -13,6 +14,8 @@ module.exports = () => {
   });
 
   app.use('/products', productsRoute);
+
+  app.use('/cart', cartRoute);
 
   return app;
 };
