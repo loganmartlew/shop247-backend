@@ -10,17 +10,17 @@ const productIsValid = product => {
 
   // Validate name
   if (!product.name) return false;
-  if (typeof product.name !== 'string')
-    if (product.name.length < 1) return false;
+  if (typeof product.name !== 'string') return false;
+  if (product.name.length < 1) return false;
 
   // Validate description
   if (!product.description) return false;
-  if (typeof product.description !== 'string')
-    if (product.description.length < 1) return false;
+  if (typeof product.description !== 'string') return false;
+  if (product.description.length < 1) return false;
 
   // Validate price
   if (!product.price) return false;
-  if (typeof product.price !== 'number');
+  if (typeof product.price !== 'number') return false;
   if (product.price < 50) return false;
 
   // Validate image array

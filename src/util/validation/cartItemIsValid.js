@@ -3,9 +3,9 @@ const productIsValid = require('./productIsValid');
 /**
  * Function to validate if a cart item has the required fields in the correct format
  *
- * @param {CartItem} item - A product object
+ * @param {CartItem} item - A cart item object
  *
- * @return {boolean} valid - Boolean value describing if the product is valid
+ * @return {boolean} valid - Boolean value describing if the cart item is valid
  */
 const cartItemIsValid = item => {
   if (!item) return false;
