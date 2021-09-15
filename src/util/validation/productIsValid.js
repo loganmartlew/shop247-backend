@@ -5,7 +5,6 @@
  *
  * @return {boolean} valid - Boolean value describing if the product is valid
  */
-
 const productIsValid = product => {
   if (!product) return false;
 
