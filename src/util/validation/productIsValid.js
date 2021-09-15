@@ -21,7 +21,8 @@ const productIsValid = product => {
 
   // Validate price
   if (!product.price) return false;
-  if (typeof product.price !== 'number') if (product.price < 50) return false;
+  if (typeof product.price !== 'number');
+  if (product.price < 50) return false;
 
   // Validate image array
   if (!product.images) return false;
