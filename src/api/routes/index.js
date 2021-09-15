@@ -18,7 +18,7 @@ module.exports = () => {
 
   app.use('/cart', cartRoute);
 
-  app.use('/users', usersRoutes);
+  app.use('/users', usersRoute);
 
   return app;
 };
