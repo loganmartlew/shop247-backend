@@ -21,7 +21,7 @@ const searchProductsByCategories = async (searchString, categories) => {};
 
 const getProductsBySellerId = async sellerId => {
   try {
-    const products = await Product.find({ serrerId });
+    const products = await Product.find({ sellerId });
 
     if (!products) throw new Error();
 
