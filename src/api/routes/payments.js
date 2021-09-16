@@ -4,8 +4,21 @@ const stripe = require('stripe')(stripeSecretKey);
 const mapDbProductsToCart = require('@util/cart/mapDbProductsToCart');
 const getLineItemsFromCart = require('@util/cart/getLineItemsFromCart');
 const cartIsValid = require('@util/validation/cartIsValid');
+const getCartPrice = require('@util/cart/getCartPrice');
+const { addOrder } = require('@util/orders/addOrder');
+const { deleteOrder } = require('@util/orders/deleteOrder');
 
 const route = Router();
+
+route.get('/paymentcancel/:orderId', async (req, res) => {
+  const orderId = req.params.orderId;
+
+  const deletedOrder = await deleteOrder(orderId);
+
+  return res
+    .status(200)
+    .json({ message: `Order deleted`, order: deletedOrder });
+});
 
 route.post('/create-checkout-session', async (req, res) => {
   if (!req.isLoggedIn) {
@@ -23,6 +36,19 @@ route.post('/create-checkout-session', async (req, res) => {
   // Get server side products to replace client side data
   // const newCart = mapDbProductsToCart(cart);
 
+  const order = {
+    totalPrice: await getCartPrice(cart),
+    items: cart,
+    date: new Date(),
+    uid: req.uid,
+  };
+
+  const newOrder = await addOrder(order);
+
+  if (!newOrder) {
+    return res.status(500).json({ message: `An unknown error occurred` });
+  }
+
   const lineItems = getLineItemsFromCart(cart);
 
   if (!lineItems) {
@@ -33,8 +59,8 @@ route.post('/create-checkout-session', async (req, res) => {
     payment_method_types: ['card'],
     line_items: lineItems,
     mode: 'payment',
-    success_url: 'http://localhost:3000',
-    cancel_url: 'http://localhost:3000',
+    success_url: 'http://localhost:3000/paymentsuccess',
+    cancel_url: `http://localhost:3000/paymentcancel?orderid=${newOrder._id}`,
   });
 
   if (!session) {

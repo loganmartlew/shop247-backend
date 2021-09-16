@@ -1,4 +1,4 @@
-const User = require('@models/User');
+const { User } = require('@models/User');
 
 const addUser = async user => {
   // Add user
