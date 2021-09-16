@@ -21,6 +21,14 @@ const orderSchema = new mongoose.Schema({
     type: [itemSchema],
     required: true,
   },
+  date: {
+    type: Date,
+    required: true,
+  },
+  uid: {
+    type: String,
+    required: true,
+  },
 });
 
 const Order = mongoose.model('order', orderSchema);
