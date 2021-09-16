@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const cors = require('./cors');
 const auth = require('./auth');
 const queryParams = require('./queryParams');
 
