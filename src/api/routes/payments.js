@@ -59,8 +59,8 @@ route.post('/create-checkout-session', async (req, res) => {
     payment_method_types: ['card'],
     line_items: lineItems,
     mode: 'payment',
-    success_url: 'http://localhost:3000/paymentsuccess',
-    cancel_url: `http://localhost:3000/paymentcancel?orderid=${newOrder._id}`,
+    success_url: 'https://shop247-aut.netlify.app/paymentsuccess',
+    cancel_url: `https://shop247-aut.netlify.app/paymentcancel?orderid=${newOrder._id}`,
   });
 
   if (!session) {
