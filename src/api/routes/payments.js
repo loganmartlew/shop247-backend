@@ -6,8 +6,19 @@ const getLineItemsFromCart = require('@util/cart/getLineItemsFromCart');
 const cartIsValid = require('@util/validation/cartIsValid');
 const getCartPrice = require('@util/cart/getCartPrice');
 const { addOrder } = require('@util/orders/addOrder');
+const { deleteOrder } = require('@util/orders/deleteOrder');
 
 const route = Router();
+
+route.get('/paymentcancel/:orderId', async (req, res) => {
+  const orderId = req.params.orderId;
+
+  const deletedOrder = await deleteOrder(orderId);
+
+  return res
+    .status(200)
+    .json({ message: `Order deleted`, order: deletedOrder });
+});
 
 route.post('/create-checkout-session', async (req, res) => {
   if (!req.isLoggedIn) {
