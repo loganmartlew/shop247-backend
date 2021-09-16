@@ -1,6 +1,7 @@
 const { apiKey } = require('@config');
+const { getUserById } = require('@util/users/searchUsers');
 
-const auth = (req, res, next) => {
+const auth = async (req, res, next) => {
   // Validate request origin
   const reqApiKey = req.get('shop247-api-key');
   if (reqApiKey !== apiKey) {
@@ -8,7 +9,15 @@ const auth = (req, res, next) => {
   }
 
   // Check if user logged in
-  if (req.get('shop247-user-uid') != null) {
+  const reqUid = req.get('shop247-user-uid');
+
+  if (reqUid != null) {
+    const user = await getUserById(reqUid);
+
+    if (!user) {
+      return res.status(404).json({ message: `User not found` });
+    }
+
     req.isLoggedIn = true;
     req.uid = req.get('shop247-user-uid');
   } else {
