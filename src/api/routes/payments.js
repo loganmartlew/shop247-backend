@@ -34,11 +34,11 @@ route.post('/create-checkout-session', async (req, res) => {
   }
 
   // Get server side products to replace client side data
-  // const newCart = mapDbProductsToCart(cart);
+  const newCart = await mapDbProductsToCart(cart);
 
   const order = {
-    totalPrice: await getCartPrice(cart),
-    items: cart,
+    totalPrice: await getCartPrice(newCart),
+    items: newCart,
     date: new Date(),
     uid: req.uid,
   };
