@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const cors = require('./cors');
 const auth = require('./auth');
 const queryParams = require('./queryParams');
 
@@ -13,6 +14,7 @@ module.exports = () => {
   //   next();
   // });
 
+  app.use(cors);
   app.use(auth);
   app.use(queryParams);
 
