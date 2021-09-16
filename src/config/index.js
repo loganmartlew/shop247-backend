@@ -16,8 +16,11 @@ const getMongoUri = () => {
   return `mongodb+srv://${mongoUsername}:${mongoPassword}@cluster0.ghvcd.mongodb.net/shop247?retryWrites=true&w=majority`;
 };
 
+const stripeSecretKey = process.env.STRIPE_SK;
+
 module.exports = {
   port: process.env.PORT || 5000,
   apiKey,
   getMongoUri,
+  stripeSecretKey,
 };
