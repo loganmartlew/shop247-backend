@@ -7,7 +7,6 @@ const {
 const { addProduct } = require('@util/products/addProduct');
 const { updateProduct } = require('@util/products/updateProduct');
 const { deleteProduct } = require('@util/products/deleteProduct');
-const { getUserById } = require('@util/users/searchUsers');
 
 const route = Router();
 
@@ -55,12 +54,6 @@ route.post('/', async (req, res) => {
   }
 
   const product = req.body.product;
-
-  const user = await getUserById(req.uid);
-
-  if (!user) {
-    return res.status(404).json({ message: `User not found` });
-  }
 
   if (user.uid !== product.sellerId) {
     return res
