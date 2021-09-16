@@ -55,7 +55,7 @@ route.post('/', async (req, res) => {
 
   const product = req.body.product;
 
-  if (user.uid !== product.sellerId) {
+  if (req.uid !== product.sellerId) {
     return res
       .status(422)
       .json({ message: `SellerId does not match request user uid` });
