@@ -7,6 +7,8 @@ const {
 const { addProduct } = require('@util/products/addProduct');
 const { updateProduct } = require('@util/products/updateProduct');
 const { deleteProduct } = require('@util/products/deleteProduct');
+const getPopulatedFeaturedProducts = require('@util/featuredProduct/getFeaturedProducts');
+const addFeaturedProduct = require('@util/featuredProduct/addProduct');
 
 const route = Router();
 
@@ -131,6 +133,22 @@ route.delete('/:productId', async (req, res) => {
 });
 
 // Get featured products
-route.get('/featured', async (req, res) => {});
+route.get('/featured', async (req, res) => {
+  const products = await getPopulatedFeaturedProducts();
+
+  res.status(200).json({ products });
+});
+
+route.post('/featured', async (req, res) => {
+  const productId = req.body;
+
+  if (!productId) {
+    return res.status(422).json({ message: `Product id not provided` });
+  }
+
+  const product = await addFeaturedProduct(productId);
+
+  return res.status(201).json({ product });
+});
 
 module.exports = route;
