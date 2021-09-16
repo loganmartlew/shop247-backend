@@ -130,4 +130,7 @@ route.delete('/:productId', async (req, res) => {
   return res.status(200).json({ message: `Product deleted` });
 });
 
+// Get featured products
+route.get('/featured', async (req, res) => {});
+
 module.exports = route;

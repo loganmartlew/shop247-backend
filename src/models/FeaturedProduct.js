@@ -4,6 +4,7 @@ const featuredProductSchema = new mongoose.Schema({
   productId: {
     type: String,
     required: true,
+    unique: true,
   },
 });
 
