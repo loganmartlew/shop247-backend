@@ -1,4 +1,4 @@
-const Product = require('@models/Product');
+const { Product } = require('@models/Product');
 
 const updateProduct = async (productId, updates) => {
   // Check if sellerId same as req auth id
