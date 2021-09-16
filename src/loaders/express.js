@@ -4,6 +4,7 @@ const api = require('@api');
 
 module.exports = async app => {
   app.use(cors());
+  app.options('*', cors());
   app.use(json());
 
   app.use(api());
