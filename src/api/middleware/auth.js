@@ -1,4 +1,4 @@
-const { apiKey } = require('@config/');
+const { apiKey } = require('@config');
 
 const auth = (req, res, next) => {
   // Validate request origin
