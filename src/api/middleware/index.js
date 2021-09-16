@@ -14,7 +14,6 @@ module.exports = () => {
   //   next();
   // });
 
-  app.use(cors);
   app.use(auth);
   app.use(queryParams);
 
