@@ -41,7 +41,7 @@ route.post('/create-checkout-session', async (req, res) => {
     return res.status(500).json({ message: `An unknown error occurred` });
   }
 
-  res.redirect(303, session.url);
+  res.status(200).json({ url: session.url });
 });
 
 module.exports = route;
