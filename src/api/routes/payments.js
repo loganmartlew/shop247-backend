@@ -8,6 +8,12 @@ const cartIsValid = require('@util/validation/cartIsValid');
 const route = Router();
 
 route.post('/create-checkout-session', async (req, res) => {
+  if (!req.isLoggedIn) {
+    return res
+      .status(401)
+      .json({ message: `Authentication is required for this action` });
+  }
+
   const cart = req.body.cart;
 
   if (!cartIsValid(cart)) {
