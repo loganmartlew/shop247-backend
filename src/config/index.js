@@ -7,6 +7,8 @@ if (envFound.error) {
   throw new Error("Couldn't find .env file");
 }
 
+const apiKey = process.env.API_KEY;
+
 const mongoUsername = process.env.DB_USERNAME;
 const mongoPassword = process.env.DB_PASSWORD;
 
@@ -16,5 +18,6 @@ const getMongoUri = () => {
 
 module.exports = {
   port: process.env.PORT || 5000,
+  apiKey,
   getMongoUri,
 };
