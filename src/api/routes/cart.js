@@ -21,3 +21,5 @@ route.post('/checkprice', async (req, res) => {
 
   return res.status(200).json({ price });
 });
+
+module.exports = route;

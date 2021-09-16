@@ -55,11 +55,16 @@ route.post('/', async (req, res) => {
 
   const product = req.body.product;
 
+  if (req.uid !== product.sellerId) {
+    return res
+      .status(422)
+      .json({ message: `SellerId does not match request user uid` });
+  }
+
   if (!productIsValid(product)) {
     return res.status(422).json({ message: `Invalid product provided` });
   }
 
-  // Add product to database (check authorization etc)
   const newProduct = await addProduct(product);
 
   return res
