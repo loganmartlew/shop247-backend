@@ -32,22 +32,22 @@ route.post('/featured', async (req, res) => {
   return res.status(201).json({ product });
 });
 
-// Search products - requires search terms
+// Search products - requires search terms, results paginated
 route.get('/', async (req, res) => {
   const query = req.query;
 
-  if (query.categories?.length > 0) {
-    // Search products with category filter
-    const products = await searchProducts(query.search);
+  // if (query.categories?.length > 0) {
+  //   // Search products with category filter
+  //   const products = await searchProducts(query.search);
 
-    return res.status(200).json({ products });
-  }
+  //   return res.status(200).json({ products });
+  // }
 
   if (query.search?.length > 0) {
     // Search products by text alone
-    const products = await searchProducts(query.search);
+    const results = await searchProducts(query.search, +query.page || 1);
 
-    return res.status(200).json({ products });
+    return res.status(200).json({ ...results });
   }
 
   return res.status(422).json({ message: `Missing query param 'search'` });

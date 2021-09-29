@@ -12,9 +12,23 @@ const getProductById = async productId => {
   }
 };
 
-const searchProducts = async searchString => {
-  const products = await Product.find({ $text: { $search: searchString } });
-  return products;
+const PAGE_LIMIT = 2;
+
+const searchProducts = async (searchString, page = 1) => {
+  const queryCount = await Product.countDocuments({
+    $text: { $search: searchString },
+  });
+
+  const products = await Product.find(
+    { $text: { $search: searchString } },
+    {},
+    { limit: PAGE_LIMIT, skip: (page - 1) * PAGE_LIMIT }
+  );
+
+  return {
+    pages: { page, total: Math.ceil(queryCount / PAGE_LIMIT) },
+    products,
+  };
 };
 
 const searchProductsByCategories = async (searchString, categories) => {};
