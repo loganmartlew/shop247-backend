@@ -15,6 +15,8 @@ const getProductById = async productId => {
 const PAGE_LIMIT = 2;
 
 const searchProducts = async (searchString, page = 1) => {
+  page = Math.abs(page);
+
   const queryCount = await Product.countDocuments({
     $text: { $search: searchString },
   });
