@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+const ratingSchema = new mongoose.Schema({
+  rating: {
+    type: Number,
+    required: true,
+  },
+  reviewers: {
+    type: [String],
+    default: [],
+  },
+});
+
 const userSchema = new mongoose.Schema({
   uid: {
     type: String,
@@ -13,6 +24,13 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+  },
+  rating: {
+    type: ratingSchema,
+    default: {
+      rating: undefined,
+      reviewers: [],
+    },
   },
 });
 
