@@ -12,7 +12,7 @@ const getProductById = async productId => {
   }
 };
 
-const PAGE_LIMIT = 2;
+const PAGE_LIMIT = 10;
 
 const searchProducts = async (searchString, page = 1) => {
   page = Math.abs(page);
