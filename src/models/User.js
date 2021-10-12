@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
   rating: {
     type: ratingSchema,
     default: {
-      rating: undefined,
+      rating: -1,
       reviewers: [],
     },
   },
