@@ -11,7 +11,7 @@ const rateUser = async (ratedUserId, ratingUserId, rating) => {
 
     const userRatingObj = {
       rating: user.rating?.rating ?? -1,
-      reviews: user.rating.reviews ?? [],
+      reviews: user.rating?.reviews ?? [],
     };
 
     const userHasRated = userRatingObj.reviews.reduce((rated, curr) => {
