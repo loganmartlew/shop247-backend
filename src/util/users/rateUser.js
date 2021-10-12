@@ -1,6 +1,11 @@
 const { User } = require('@models/User');
 
 const rateUser = async (ratedUserId, ratingUserId, rating) => {
+  if (!rating) return null;
+  if (typeof rating !== 'number') return null;
+  if (rating < 0) return null;
+  if (rating > 5) return null;
+
   try {
     const user = await User.findOne({ uid: ratedUserId });
 
@@ -38,9 +43,11 @@ const rateUser = async (ratedUserId, ratingUserId, rating) => {
       (rating, curr) => rating + curr.rating,
       0
     );
-    const newRating = Math.round(sumRatings / userRatingObj.reviews.length);
+    const newRatingNumber = Math.round(
+      sumRatings / userRatingObj.reviews.length
+    );
 
-    userRatingObj.rating = newRating;
+    userRatingObj.rating = newRatingNumber;
 
     user.rating = userRatingObj;
     const updatedUser = await user.save();
