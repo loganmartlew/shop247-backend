@@ -47,8 +47,20 @@ route.get('/:uid/products', async (req, res) => {
 
 // Rate a user
 route.post('/:uid/rate', async (req, res) => {
+  if (!req.isLoggedIn) {
+    return res
+      .status(401)
+      .json({ message: `Authentication is required for this action` });
+  }
+
   const uid = req.params.uid;
   const { reviewerUid, rating } = req.body;
+
+  if (req.uid !== reviewerUid) {
+    return res
+      .status(422)
+      .json({ message: `SellerId does not match request user uid` });
+  }
 
   const user = await rateUser(uid, reviewerUid, rating);
 
