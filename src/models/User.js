@@ -1,14 +1,23 @@
 const mongoose = require('mongoose');
 
+const reviewSchema = new mongoose.Schema({
+  uid: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  rating: {
+    type: Number,
+    required: true,
+  },
+});
+
 const ratingSchema = new mongoose.Schema({
   rating: {
     type: Number,
     required: true,
   },
-  reviewers: {
-    type: [String],
-    default: [],
-  },
+  reviews: [reviewSchema],
 });
 
 const userSchema = new mongoose.Schema({
@@ -25,13 +34,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  rating: {
-    type: ratingSchema,
-    default: {
-      rating: -1,
-      reviewers: [],
-    },
-  },
+  rating: ratingSchema,
 });
 
 const User = mongoose.model('user', userSchema);

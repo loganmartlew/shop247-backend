@@ -3,6 +3,7 @@ const userIsValid = require('@util/validation/userIsValid');
 const { getUserById } = require('@util/users/searchUsers');
 const { addUser } = require('@util/users/addUser');
 const { getProductsBySellerId } = require('@util/products/searchProducts');
+const { rateUser } = require('@util/users/rateUser');
 
 const route = Router();
 
@@ -42,6 +43,16 @@ route.get('/:uid/products', async (req, res) => {
   const products = await getProductsBySellerId(uid);
 
   return res.status(200).json({ products });
+});
+
+// Rate a user
+route.post('/:uid/rate', async (req, res) => {
+  const uid = req.params.uid;
+  const { reviewerUid, rating } = req.body;
+
+  const user = await rateUser(uid, reviewerUid, rating);
+
+  return res.status(201).json({ rating: user.rating.rating });
 });
 
 module.exports = route;
