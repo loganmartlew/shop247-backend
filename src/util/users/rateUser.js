@@ -10,9 +10,8 @@ const rateUser = async (ratedUserId, ratingUserId, rating) => {
     const user = await User.findOne({ uid: ratedUserId });
 
     const userRatingObj = {
-      rating: -1,
-      reviews: [],
-      ...user.rating,
+      rating: user.rating?.rating ?? -1,
+      reviews: user.rating.reviews ?? [],
     };
 
     const userHasRated = userRatingObj.reviews.reduce((rated, curr) => {
