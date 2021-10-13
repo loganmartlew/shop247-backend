@@ -1,10 +1,14 @@
 const { User } = require('@models/User');
 
-const updateUser = async (uid, facebook, instagram, location, avatar) => {
+const updateUser = async (uid, name, facebook, instagram, location, avatar) => {
   try {
     const user = await User.findOne({ uid });
 
     if (!user) return null;
+
+    if (name) {
+      user.name = name;
+    }
 
     if (facebook) {
       user.social.facebook = facebook;
