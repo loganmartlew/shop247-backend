@@ -90,7 +90,14 @@ route.patch('/:uid', async (req, res) => {
 
   const { name, facebook, instagram, location, avatar } = req.body;
 
-  const newUser = await updateUser(name, facebook, instagram, location, avatar);
+  const newUser = await updateUser(
+    uid,
+    name,
+    facebook,
+    instagram,
+    location,
+    avatar
+  );
 
   return res.status(200).json({ user: newUser });
 });
