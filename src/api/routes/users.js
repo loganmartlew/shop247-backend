@@ -2,6 +2,7 @@ const { Router } = require('express');
 const userIsValid = require('@util/validation/userIsValid');
 const { getUserById } = require('@util/users/searchUsers');
 const { addUser } = require('@util/users/addUser');
+const { updateUser } = require('@util/users/updateUser');
 const { getProductsBySellerId } = require('@util/products/searchProducts');
 const { rateUser } = require('@util/users/rateUser');
 
@@ -69,6 +70,29 @@ route.post('/:uid/rate', async (req, res) => {
   }
 
   return res.status(201).json({ rating: user.rating.rating });
+});
+
+// Update a user's information
+route.patch('/:uid', async (req, res) => {
+  if (!req.isLoggedIn) {
+    return res
+      .status(401)
+      .json({ message: `Authentication is required for this action` });
+  }
+
+  const uid = req.params.uid;
+
+  if (req.uid !== uid) {
+    return res
+      .status(422)
+      .json({ message: `SellerId does not match request user uid` });
+  }
+
+  const { name, facebook, instagram, location, avatar } = req.body;
+
+  const newUser = await updateUser(name, facebook, instagram, location, avatar);
+
+  return res.status(200).json({ user: newUser });
 });
 
 module.exports = route;

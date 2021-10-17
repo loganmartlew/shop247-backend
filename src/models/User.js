@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 
+const socialSchema = new mongoose.Schema({
+  facebook: String,
+  instagram: String,
+});
+
 const reviewSchema = new mongoose.Schema({
   uid: {
     type: String,
@@ -33,6 +38,12 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+  },
+  social: socialSchema,
+  location: String,
+  avatar: {
+    type: String,
+    default: 'https://shop247-backend.herokuapp.com/defaultprofile.webp',
   },
   rating: ratingSchema,
 });

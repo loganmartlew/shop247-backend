@@ -2,6 +2,12 @@ const { apiKey } = require('@config');
 const { getUserById } = require('@util/users/searchUsers');
 
 const auth = async (req, res, next) => {
+  // Allow all requests for defaultprofile.webp
+  if (req.path === '/defaultprofile.webp') {
+    next();
+    return;
+  }
+
   // Validate request origin
   const reqApiKey = req.get('shop247-api-key');
   if (reqApiKey !== apiKey) {
