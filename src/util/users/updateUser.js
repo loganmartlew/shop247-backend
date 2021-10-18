@@ -19,8 +19,8 @@ const updateUser = async (uid, name, facebook, instagram, location, avatar) => {
     }
 
     const social = {
-      facebook: facebook || user.social.facebook || '',
-      instagram: instagram || user.social.instagram || '',
+      facebook: facebook || user?.social?.facebook || '',
+      instagram: instagram || user?.social?.instagram || '',
     };
 
     user.social = social;
