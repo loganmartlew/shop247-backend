@@ -10,14 +10,6 @@ const updateUser = async (uid, name, facebook, instagram, location, avatar) => {
       user.name = name;
     }
 
-    if (facebook) {
-      user.social.facebook = facebook;
-    }
-
-    if (instagram) {
-      user.social.instagram = instagram;
-    }
-
     if (location) {
       user.location = location;
     }
@@ -25,6 +17,13 @@ const updateUser = async (uid, name, facebook, instagram, location, avatar) => {
     if (avatar) {
       user.avatar = avatar;
     }
+
+    const social = {
+      facebook: facebook || user.social.facebook || '',
+      instagram: instagram || user.social.instagram || '',
+    };
+
+    user.social = social;
 
     const newUser = await user.save();
 
